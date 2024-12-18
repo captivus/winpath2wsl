@@ -9,6 +9,7 @@ Make navigating between Windows and WSL paths a breeze! This toolkit provides co
 - 🛡️ Handles spaces and special characters in paths
 - 📝 Automatically strips file extensions when needed
 - 💪 Works with both quoted and unquoted paths
+- 🔧 Perfect for use with rsync, cp, and other shell commands
 
 ## 🚀 Installation
 
@@ -22,9 +23,9 @@ chmod +x winpath2wsl.sh
 source ~/path/to/cdw_function.sh
 ```
 
-## 💡 Usage
+## 💡 Usage & Examples
 
-### Command Line Script
+### As a Path Converter
 ```bash
 ./winpath2wsl.sh "C:\Users\YourName\Documents"
 ```
@@ -34,7 +35,30 @@ source ~/path/to/cdw_function.sh
 cdw "C:\Users\YourName\Documents"
 ```
 
-## 🔍 Examples
+### With rsync 🔄
+```bash
+# Sync a single file
+rsync -av "$(./winpath2wsl.sh "C:\Users\YourName\Documents\file.txt")" ~/documents/
+
+# Sync an entire directory
+rsync -av "$(./winpath2wsl.sh "C:\Users\YourName\Documents\MyFolder")" ~/documents/
+
+# In a shell script
+SOURCE=$(./winpath2wsl.sh "C:\Users\YourName\Documents\MyFolder")
+DEST="~/documents/"
+rsync -av "$SOURCE" "$DEST"
+```
+
+### With cp 📋
+```bash
+# Copy a single file
+cp "$(./winpath2wsl.sh "C:\Users\YourName\Documents\file.txt")" ~/documents/
+
+# Copy an entire directory
+cp -r "$(./winpath2wsl.sh "C:\Users\YourName\Documents\MyFolder")" ~/documents/
+```
+
+## 🔍 Navigation Examples
 
 ```bash
 # Convert and navigate to a Windows path
@@ -54,6 +78,7 @@ The tools use Bash string manipulation to:
 2. Convert backslashes to forward slashes
 3. Transform Windows drive letters (e.g., `C:`) to WSL mount points (e.g., `/mnt/c`)
 4. Handle file paths by extracting their parent directory
+5. Provide clean output perfect for command substitution
 
 ## 🤝 Contributing
 
