@@ -25,6 +25,12 @@ source ~/path/to/cdw_function.sh
 
 ## 💡 Usage & Examples
 
+The easiest way to copy the Windows path of a file or directory is to right click on it and select "Copy Path".
+
+![copy as path](copy_as_path.png)
+
+Now, you can paste this path into the terminal and use any of the Windows-WSL Path Tools.  Here are some examples.
+
 ### As a Path Converter
 ```bash
 ./winpath2wsl.sh "C:\Users\YourName\Documents"
